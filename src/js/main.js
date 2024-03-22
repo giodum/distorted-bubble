@@ -1,4 +1,4 @@
-// Inspired by Fabio Ottaviani code - https://codepen.io/supah/pen/BqwJxq - https://twitter.com/supahfunk
+/**! Inspired by Fabio Ottaviani code - https://codepen.io/supah/pen/BqwJxq - https://twitter.com/supahfunk */
 
 import '/src/scss/main.scss'
 

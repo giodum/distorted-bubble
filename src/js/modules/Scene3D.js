@@ -7,7 +7,7 @@ import math from 'canvas-sketch-util/math'
 import random from 'canvas-sketch-util/random'
 
 const DEV_HELPERS = false
-const DEV_WIREFRAMES = true
+const DEV_WIREFRAMES = false
 
 export default class Scene3D {
   // unique instance
@@ -45,13 +45,13 @@ export default class Scene3D {
 
     // set shadows on renderer
     this.renderer.shadowMap.enabled = true
-    this.renderer.shadowMapSoft = true // to check
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
     // initialize scene
     this.scene = new THREE.Scene()
 
     // initialize fog
-    this.scene.fog = new THREE.Fog(0x000000, 10, 1000)
+    this.scene.fog = new THREE.Fog(0xdfe7fd, 10, 1000)
 
     // initilaize camera
     this.camera = new THREE.PerspectiveCamera(
@@ -63,7 +63,7 @@ export default class Scene3D {
     this.camera.position.set(0, 0, 300)
 
     // initialize orbit control
-    this.#createOrbitControl()
+    // this.#createOrbitControl()
 
     // initialize basic helpers
     this.#createBasicHelpers()
@@ -104,7 +104,7 @@ export default class Scene3D {
 
   #createLights() {
     // initialize hemisphere light
-    this.hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x000000, 0.5)
+    this.hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x000000, 2)
     this.scene.add(this.hemisphereLight)
 
     if (DEV_HELPERS) {
@@ -116,8 +116,9 @@ export default class Scene3D {
     }
 
     // initialize directional light for shadow casting
-    this.shadowLight = new THREE.DirectionalLight(0xff8f16, 0.4)
+    this.shadowLight = new THREE.DirectionalLight(0xffffff, 1)
     this.shadowLight.position.set(0, 450, 350)
+    this.shadowLight.castShadow = true
 
     // set limits for shadow casting
     this.shadowLight.shadow.camera.left = -650
@@ -126,8 +127,9 @@ export default class Scene3D {
     this.shadowLight.shadow.camera.bottom = -650
     this.shadowLight.shadow.camera.near = 1
     this.shadowLight.shadow.camera.far = 1000
-    this.shadowLight.shadow.mapSize.width = 2048
-    this.shadowLight.shadow.mapSize.height = 2048
+    this.shadowLight.shadow.mapSize.width = 4096
+    this.shadowLight.shadow.mapSize.height = 4096
+    this.scene.add(this.shadowLight)
 
     if (DEV_HELPERS) {
       const shadowLightHelper = new THREE.DirectionalLightHelper(
@@ -139,7 +141,7 @@ export default class Scene3D {
     }
 
     // initialize other directional lights
-    this.directionaLight1 = new THREE.DirectionalLight(0xfff150, 0.25)
+    this.directionaLight1 = new THREE.DirectionalLight(0xc0fdff, 2)
     this.directionaLight1.position.set(-600, 350, 350)
     this.scene.add(this.directionaLight1)
 
@@ -152,8 +154,9 @@ export default class Scene3D {
       this.scene.add(directionalLight1Helper)
     }
 
-    this.directionaLight2 = new THREE.DirectionalLight(0xfff150, 0.15)
+    this.directionaLight2 = new THREE.DirectionalLight(0xb388eb, 0.15)
     this.directionaLight2.position.set(0, -250, 300)
+    this.scene.add(this.directionaLight2)
 
     if (DEV_HELPERS) {
       const directionalLight2Helper = new THREE.DirectionalLightHelper(
@@ -163,8 +166,6 @@ export default class Scene3D {
       )
       this.scene.add(directionalLight2Helper)
     }
-
-    this.scene.add(this.directionaLight2)
   }
 
   #createBubble() {
@@ -182,10 +183,11 @@ export default class Scene3D {
 
     // create bubble material
     this.bubbleMaterial = new THREE.MeshStandardMaterial({
-      emissive: 0xbd4be3,
-      emissiveIntensity: 0.5,
-      metalness: 0.21,
-      roughness: 0.61,
+      color: 0xa3c4f3,
+      emissive: 0xf1c0e8,
+      emissiveIntensity: 0.4,
+      metalness: 0.4,
+      roughness: 1,
       side: THREE.FrontSide,
       wireframe: DEV_WIREFRAMES,
     })
@@ -200,10 +202,10 @@ export default class Scene3D {
     // ShadowMaterial is transparent but can receive shadows
     this.planeGeometry = new THREE.PlaneGeometry(2000, 2000)
     this.planeMaterial = new THREE.ShadowMaterial({
-      opacity: 0.15,
+      opacity: 0.5,
     })
     this.plane = new THREE.Mesh(this.planeGeometry, this.planeMaterial)
-    this.plane.position.set(0, -150, 0)
+    this.plane.position.set(0, -200, 0)
     this.plane.rotation.x = -90 * (Math.PI / 180) // from degrees to radiants
     this.plane.receiveShadow = true
     this.scene.add(this.plane)
