@@ -233,9 +233,9 @@ export default class Scene3D {
 
       // getting perlin noise value at that specific point
       const perlin = random.noise3D(
-        x * 0.006 + time * 0.0005,
-        y * 0.006 + time * 0.0005,
-        z * 0.006 + time * 0.0005
+        isFinite(x * 0.006 + time * 0.0005) ? x * 0.006 + time * 0.0005 : 0,
+        isFinite(y * 0.006 + time * 0.0005) ? y * 0.006 + time * 0.0005 : 0,
+        isFinite(z * 0.006 + time * 0.0005) ? z * 0.006 + time * 0.0005 : 0
       )
 
       // compute the ration for vertex alteration
