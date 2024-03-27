@@ -3,6 +3,8 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 
 import gsap from 'gsap'
 
+import Stats from 'stats.js'
+
 import math from 'canvas-sketch-util/math'
 import random from 'canvas-sketch-util/random'
 
@@ -32,6 +34,12 @@ export default class Scene3D {
     if (Scene3D.item) {
       throw new Error('Scene3D has already been initialized')
     }
+
+    // init stats
+    this.stats = new Stats()
+    this.stats.showPanel(0)
+    document.body.appendChild(this.stats.dom)
+    this.stats.dom.classList.add('stats')
 
     // initialize renderer
     this.renderer = new THREE.WebGLRenderer({
@@ -308,6 +316,8 @@ export default class Scene3D {
   animate(time) {
     requestAnimationFrame((time) => this.animate(time))
 
+    this.stats.begin()
+
     // update bubble rotation
     this.bubble.rotation.y =
       -4 * math.mapRange(this.#mouse.x, 0, window.innerWidth, 0, 4)
@@ -327,6 +337,8 @@ export default class Scene3D {
     // clear buffer and render the scene
     this.renderer.clear()
     this.renderer.render(this.scene, this.camera)
+
+    this.stats.end()
   }
 
   resize() {

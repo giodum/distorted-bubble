@@ -1,5 +1,13 @@
+:root {
+  --color-base: #1E1E1E;
+  --color-primary: #FC2D19;
+  --color-text: #E6E6E6;
+}
+
 body {
-  background: linear-gradient(103deg, rgba(152,245,225, .5) 0%, rgba(255,207,210,.5) 100%);
+  background-color: linear-gradient(103deg, rgba(152,245,225, .5) 0%, rgba(255,207,210,.5) 100%);
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.125;
   height: 100svh;
   overflow: hidden;
   width: 100svw;

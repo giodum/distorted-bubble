@@ -4,14 +4,94 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- font loading  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet" />
+
+    <!-- reset css -->
     <link
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
       rel="stylesheet" />
-    <title>Vite App</title>
+
+    <!-- favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png?v=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?v=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicons/favicon-16x16.png?v=1" />
+    <link rel="manifest" href="/favicons/site.webmanifest?v=1" />
+    <link
+      rel="mask-icon"
+      href="/favicons/safari-pinned-tab.svg?v=1"
+      color="#fc2d19" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico?v=1" />
+    <meta name="msapplication-TileColor" content="#1e1e1e" />
+    <meta name="theme-color" content="#1e1e1e" />
+
+    <title>Distorted Bubble</title>
+    <meta
+      name="description"
+      content="moijesuisjo - creative front-end developer" />
+    <meta name="author" content="Giorgio Maria Duminuco" />
   </head>
   <body>
     <div id="app">
       <canvas id="3dscene"></canvas>
+      <div class="info">
+        <div class="info-button">
+          <img
+            src="/logo.svg"
+            alt="moijesuisjo - creative front-end developer"
+            width="16px" />
+        </div>
+        <div class="info-modal">
+          <div class="info-section">
+            <div class="info-title">Distorted Bubble 🔮</div>
+            <div class="info-description">
+              Simple Three.js project of a bubble that distorts according to
+              mouse movement.
+            </div>
+          </div>
+
+          <div class="info-section">
+            <div class="info-title">Instructions</div>
+            <div class="info-description">
+              Move the mouse or touch the screen and move finger to see
+              distortion.<br />
+              Click or tap to make it contract.<br />
+              Have fun!
+            </div>
+          </div>
+
+          <div class="info-section">
+            <div class="info-title">References</div>
+            <div class="info-description">
+              Code inspired by
+              <a href="https://www.supah.it/portfolio/" target="_blank"
+                >Fabio Ottaviani</a
+              >
+              -
+              <a href="https://codepen.io/supah" target="_blank"
+                >Supah Codepen</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script type="module" src="/src/js/main.js"></script>
   </body>
